@@ -1,11 +1,14 @@
-import { SignIn } from "./pages/SignIn";
 import GlobalStyle from "./styles/GlobalStyle";
+
+import AuthProvider from "./providers/AuthProvider";
+
+import Routes from "./routes";
 
 export default function App() {
   return (
-    <>
+    <AuthProvider>
       <GlobalStyle />
-      <SignIn />
-    </>
+      <Routes />
+    </AuthProvider>
   );
 }
