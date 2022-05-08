@@ -18,6 +18,11 @@ export default createGlobalStyle`
     outline: none;
   }
 
+  *::selection {
+    background: var(--primary);
+    color: var(--text);
+  }
+
   h1, h2 {
     color: var(--text);
   }
