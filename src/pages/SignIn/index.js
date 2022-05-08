@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Container } from "../../components/Container";
@@ -8,7 +8,7 @@ import { TextButton } from "../../components/TextButton";
 
 import { signIn } from "./../../services/api.js";
 
-import { setItem, getItem } from "./../../utils";
+import AuthContext from "../../contexts/AuthContext";
 
 const initialState = {
   email: "",
@@ -18,13 +18,14 @@ const initialState = {
 const SignIn = () => {
   const [form, setForm] = useState(initialState);
   const [loading, setLoading] = useState(false);
+  const { auth, handleAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (getItem("auth")) {
+    if (auth) {
       navigate("/wallet", { replace: true });
     }
-  }, [navigate]);
+  }, [navigate, auth]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -38,7 +39,7 @@ const SignIn = () => {
     signIn(form)
       .then((res) => {
         setLoading(false);
-        setItem("auth", { ...res.data });
+        handleAuth({ ...res.data });
         if (res.status === 200) navigate("/wallet", { replace: true });
       })
       .catch((e) => {
