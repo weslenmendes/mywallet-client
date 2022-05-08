@@ -1,3 +1,10 @@
+import GlobalStyle from "./styles/GlobalStyle";
+
 export default function App() {
-  return <h1>MyWallet</h1>;
+  return (
+    <>
+      <GlobalStyle />
+      <h1>MyWallet</h1>
+    </>
+  );
 }
