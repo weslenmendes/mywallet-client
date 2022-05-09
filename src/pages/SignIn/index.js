@@ -7,6 +7,7 @@ import { Button } from "../../components/Button";
 import { TextButton } from "../../components/TextButton";
 
 import { signIn } from "./../../services/api.js";
+import { getItem } from "../../utils";
 
 import AuthContext from "../../contexts/AuthContext";
 
@@ -22,10 +23,10 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (auth) {
+    if (auth?.token) {
       navigate("/wallet", { replace: true });
     }
-  }, [navigate, auth]);
+  }, [auth, navigate]);
 
   const handleChange = (e) => {
     const value = e.target.value;

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Container } from "./../../components/Container";
@@ -24,6 +24,12 @@ const NewExit = (props) => {
   const [loading, setLoading] = useState(false);
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth.token) {
+      navigate("/", { replace: true });
+    }
+  }, [auth, navigate]);
 
   const handleChange = (e) => {
     const value = e.target.value;

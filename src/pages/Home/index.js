@@ -13,20 +13,21 @@ import { Box } from "../../components/Box";
 import { Board } from "../../components/Board";
 import { BoxButton } from "../../components/BoxButton";
 import { Separator } from "./../../components/Separator";
-
-import { getData } from "./../../services/api";
-
-import AuthContext from "./../../contexts/AuthContext";
 import { ItemList } from "../../components/ItemList";
 
+import { getData, signOut } from "./../../services/api";
+
+import AuthContext from "./../../contexts/AuthContext";
+import { removeItem } from "../../utils";
+
 const Home = (props) => {
-  const { auth } = useContext(AuthContext);
+  const { auth, handleAuth } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [balance, setBalance] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (auth) {
+    if (auth?.token) {
       getData(auth.token)
         .then((res) => {
           if (res.status === 200) {
@@ -36,7 +37,11 @@ const Home = (props) => {
         })
         .catch((e) => console.log(e.response.data));
     }
-  }, [auth]);
+
+    if (!auth.token) {
+      navigate("/", { replace: true });
+    }
+  }, [auth, navigate]);
 
   const calculateBalance = (data) => {
     return data.reduce((acc, prev) => {
@@ -46,11 +51,23 @@ const Home = (props) => {
     }, 0);
   };
 
+  const handleSignout = () => {
+    const confirm = window.confirm("Você quer mesmo sair?");
+
+    if (confirm && auth.token) {
+      signOut(auth.token).then(() => {
+        removeItem("auth");
+        handleAuth({});
+        navigate("/", { replace: true });
+      });
+    }
+  };
+
   return (
     <Container justifyContent="start">
       <Box>
-        <h2>Olá, {auth.name}</h2>
-        <button>
+        <h2>Olá, {auth?.name}</h2>
+        <button onClick={() => handleSignout()}>
           <LogoutIcon />
         </button>
       </Box>

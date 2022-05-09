@@ -22,6 +22,14 @@ export async function signUp(data) {
   }
 }
 
+export async function signOut(token) {
+  try {
+    await axios.post(`${BASE_URL}/sign-out`, {}, createConfig(token));
+  } catch (e) {
+    console.error(e.response.data);
+  }
+}
+
 export async function getData(token) {
   try {
     return await axios.get(`${BASE_URL}/transactions`, createConfig(token));
