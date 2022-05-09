@@ -23,6 +23,10 @@ const ContainerStyled = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    h1 {
+      margin-bottom: 30px;
+    }
   }
 `;
 

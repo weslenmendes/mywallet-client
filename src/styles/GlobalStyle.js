@@ -63,6 +63,10 @@ export default createGlobalStyle`
     border-radius: 5px;
   }
 
+  input::placeholder {
+    color: var(--text-input);
+  }
+
   iframe {
     pointer-events: none;
   }

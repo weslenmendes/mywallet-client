@@ -67,7 +67,7 @@ const UpdateEntry = (props) => {
   return (
     <Container justifyContent="start">
       <Box>
-        <h2>Nova {state?.type === "in" ? "entrada" : "saída"}</h2>
+        <h2>Editar {state?.type === "in" ? "entrada" : "saída"}</h2>
         <button onClick={() => navigate("/wallet")}>
           <CloseIcon title="Fechar" className="close-icon" />
         </button>

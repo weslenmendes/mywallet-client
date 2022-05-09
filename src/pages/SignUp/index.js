@@ -68,8 +68,8 @@ const SignUp = (props) => {
 
   return (
     <Container>
-      <h1>MyWallet</h1>
       <form onSubmit={handleSubmit} autoComplete="off">
+        <h1>MyWallet</h1>
         <Input
           type="text"
           name="name"

@@ -54,7 +54,7 @@ const BoardStyled = styled.main`
     align-items: center;
 
     position: sticky;
-    bottom: 0px;
+    bottom: -11px;
     left: 15px;
     right: 15px;
 
@@ -64,6 +64,7 @@ const BoardStyled = styled.main`
       font-size: 17px;
       line-height: 20px;
       color: #000;
+      padding: 10px 0;
     }
 
     p {

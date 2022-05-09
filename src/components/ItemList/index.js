@@ -34,8 +34,10 @@ const ItemList = (props) => {
 
         return (
           <ItemStyled key={i} onClick={() => handleUpdate(item)}>
-            <DateStyled>{date}</DateStyled>
-            <DescriptionStyled>{description}</DescriptionStyled>
+            <p className="details">
+              <DateStyled>{date}</DateStyled>
+              <DescriptionStyled>{description}</DescriptionStyled>
+            </p>
             <div>
               <AmountStyled type={type}>
                 {amount.toLocaleString("pt-br", { minimumFractionDigits: 2 })}
@@ -60,6 +62,7 @@ const ItemListStyled = styled.ul`
 
   color: #000;
 `;
+
 const ItemStyled = styled.li`
   display: flex;
   width: 100%;
@@ -68,6 +71,14 @@ const ItemStyled = styled.li`
   margin-bottom: 23px;
 
   cursor: pointer;
+
+  .details {
+    width: 50%;
+    text-align: left;
+
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const DateStyled = styled.span`
@@ -78,19 +89,20 @@ const DateStyled = styled.span`
 
   color: #c6c6c6;
 `;
+
 const DescriptionStyled = styled.span`
   font-family: "Raleway";
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
+  color: #000000;
 
+  display: inline-block;
+  width: 64%;
   padding-left: 7px;
   overflow: hidden;
-  width: 110px;
   word-break: keep-all;
   text-overflow: ellipsis;
-
-  color: #000000;
 `;
 
 const AmountStyled = styled.span`
