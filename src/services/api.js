@@ -54,6 +54,19 @@ export async function addEntry(token, data) {
   }
 }
 
+export async function updateEntry(id, token, data) {
+  try {
+    return await axios.put(
+      `${BASE_URL}/transactions/${id}`,
+      data,
+      createConfig(token)
+    );
+  } catch (e) {
+    window.alert(e.response.data);
+    console.error(e.response.data);
+  }
+}
+
 export async function deleteEntry(token, id) {
   try {
     return await axios.delete(

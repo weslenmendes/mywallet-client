@@ -20,7 +20,11 @@ const ItemList = (props) => {
     }
   };
 
-  const handleUpdate = (id) => {};
+  const handleUpdate = (item) => {
+    if (item) {
+      navigate(`/wallet/update/${item._id}`, { state: { ...item } });
+    }
+  };
 
   return (
     <ItemListStyled>
@@ -28,7 +32,7 @@ const ItemList = (props) => {
         let { _id, date, amount, description, type } = item;
 
         return (
-          <ItemStyled key={i} onClick={() => handleUpdate(_id)}>
+          <ItemStyled key={i} onClick={() => handleUpdate(item)}>
             <DateStyled>{date}</DateStyled>
             <DescriptionStyled>{description}</DescriptionStyled>
             <div>

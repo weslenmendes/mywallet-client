@@ -5,6 +5,7 @@ import { SignUp } from "../pages/SignUp";
 import { Home } from "../pages/Home";
 import { NewEntry } from "../pages/NewEntry";
 import { NewExit } from "../pages/NewExit";
+import { UpdateEntry } from "../pages/UpdateEntry";
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
         <Route path="/wallet" element={<Home />} />
         <Route path="/wallet/new-entry" element={<NewEntry />} />
         <Route path="/wallet/new-exit" element={<NewExit />} />
+        <Route path="/wallet/update/:id" element={<UpdateEntry />} />
       </Routes>
     </BrowserRouter>
   );
