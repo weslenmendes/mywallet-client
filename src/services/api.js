@@ -29,3 +29,26 @@ export async function getData(token) {
     console.error(e.response.data);
   }
 }
+
+export async function addEntry(token, data) {
+  try {
+    return await axios.post(
+      `${BASE_URL}/transactions`,
+      data,
+      createConfig(token)
+    );
+  } catch (e) {
+    console.error(e.response.data);
+  }
+}
+
+export async function deleteEntry(token, id) {
+  try {
+    return await axios.delete(
+      `${BASE_URL}/transactions/${id}`,
+      createConfig(token)
+    );
+  } catch (e) {
+    console.error(e.response.data);
+  }
+}

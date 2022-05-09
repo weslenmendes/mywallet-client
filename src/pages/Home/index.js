@@ -17,10 +17,12 @@ import { Separator } from "./../../components/Separator";
 import { getData } from "./../../services/api";
 
 import AuthContext from "./../../contexts/AuthContext";
+import { ItemList } from "../../components/ItemList";
 
 const Home = (props) => {
   const { auth } = useContext(AuthContext);
   const [data, setData] = useState([]);
+  const [balance, setBalance] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,11 +31,20 @@ const Home = (props) => {
         .then((res) => {
           if (res.status === 200) {
             setData(res.data);
+            setBalance(calculateBalance(res.data));
           }
         })
         .catch((e) => console.log(e.response.data));
     }
   }, [auth]);
+
+  const calculateBalance = (data) => {
+    return data.reduce((acc, prev) => {
+      if (prev.type === "in") return acc + prev.amount;
+
+      return acc - prev.amount;
+    }, 0);
+  };
 
   return (
     <Container justifyContent="start">
@@ -43,11 +54,13 @@ const Home = (props) => {
           <LogoutIcon />
         </button>
       </Box>
-      <Board>
+      <Board balance={balance}>
         {data.length === 0 ? (
           <p>Não há registros de entrada ou saída</p>
         ) : (
-          data.map((d, i) => <p key={i}>{d}</p>)
+          <>
+            <ItemList data={data} token={auth.token} />
+          </>
         )}
       </Board>
       <Box bgButtonColor="#A328D6">

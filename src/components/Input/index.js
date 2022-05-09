@@ -22,6 +22,10 @@ const InputStyled = styled.input`
     user-select: none;
     background: red;
   }
+
+  input:placeholder {
+    color: #000000 !important;
+  }
 `;
 
 export { Input };
