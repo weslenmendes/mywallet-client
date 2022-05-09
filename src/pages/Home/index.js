@@ -38,7 +38,7 @@ const Home = (props) => {
         .catch((e) => console.log(e.response.data));
     }
 
-    if (!auth.token) {
+    if (!auth?.token || !auth?.name) {
       navigate("/", { replace: true });
     }
   }, [auth, navigate]);

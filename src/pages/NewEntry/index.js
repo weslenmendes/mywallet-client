@@ -26,7 +26,7 @@ const NewEntry = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!auth.token) {
+    if (!auth.token || !auth.name) {
       navigate("/", { replace: true });
     }
   }, [auth, navigate]);
