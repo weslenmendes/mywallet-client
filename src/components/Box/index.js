@@ -28,6 +28,11 @@ const BoxStyled = styled.div`
   button {
     background: ${({ bgButtonColor }) => bgButtonColor || "transparent"};
   }
+
+  .close-icon {
+    height: 30px;
+    width: 30px;
+  }
 `;
 
 export { Box };

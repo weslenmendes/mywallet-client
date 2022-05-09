@@ -7,6 +7,8 @@ import { Input } from "./../../components/Input";
 import { Button } from "./../../components/Button";
 import { Separator } from "./../../components/Separator";
 
+import { AiOutlineCloseCircle as CloseIcon } from "react-icons/ai";
+
 import AuthContext from "./../../contexts/AuthContext";
 
 import { addEntry } from "./../../services/api.js";
@@ -54,7 +56,9 @@ const NewEntry = (props) => {
     <Container justifyContent="start">
       <Box>
         <h2>Nova entrada</h2>
-        <button></button>
+        <button onClick={() => navigate("/wallet")}>
+          <CloseIcon title="Fechar" className="close-icon" />
+        </button>
       </Box>
       <Separator width="100%" height="25px" />
       <form onSubmit={handleSubmit} autoComplete="off">
