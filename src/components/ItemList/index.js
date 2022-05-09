@@ -6,7 +6,8 @@ import { deleteEntry } from "./../../services/api.js";
 const ItemList = (props) => {
   const navigate = useNavigate();
 
-  const handleDelete = (id) => {
+  const handleDelete = (e, id) => {
+    e.stopPropagation();
     const confirm = window.confirm("Você quer deletar esse item?");
 
     if (confirm && props.token) {
@@ -39,7 +40,7 @@ const ItemList = (props) => {
               <AmountStyled type={type}>
                 {amount.toLocaleString("pt-br", { minimumFractionDigits: 2 })}
               </AmountStyled>
-              <DeleteButtonStyled onClick={() => handleDelete(_id)}>
+              <DeleteButtonStyled onClick={(e) => handleDelete(e, _id)}>
                 X
               </DeleteButtonStyled>
             </div>
