@@ -14,6 +14,7 @@ import { Board } from "../../components/Board";
 import { BoxButton } from "../../components/BoxButton";
 import { Separator } from "./../../components/Separator";
 import { ItemList } from "../../components/ItemList";
+import { Loader } from "./../../components/Loader";
 
 import { getData, signOut } from "./../../services/api";
 
@@ -22,20 +23,26 @@ import { removeItem } from "../../utils";
 
 const Home = (props) => {
   const { auth, handleAuth } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [balance, setBalance] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (auth?.token) {
+      setLoading(true);
       getData(auth.token)
         .then((res) => {
           if (res.status === 200) {
+            setLoading(false);
             setData(res.data);
             setBalance(calculateBalance(res.data));
           }
         })
-        .catch((e) => console.log(e.response.data));
+        .catch((e) => {
+          setLoading(false);
+          console.log(e.response.data);
+        });
     }
 
     if (!auth?.token || !auth?.name) {
@@ -63,6 +70,20 @@ const Home = (props) => {
     }
   };
 
+  const createContent = () => {
+    let content = null;
+
+    if (loading) {
+      content = <Loader color="#8C11BE" height="50" width="80" />;
+    } else if (data.length === 0 && !loading) {
+      content = <p>Não há registros de entrada ou saída</p>;
+    } else {
+      content = <ItemList data={data} token={auth.token} />;
+    }
+
+    return content;
+  };
+
   return (
     <Container justifyContent="start">
       <Box>
@@ -71,15 +92,7 @@ const Home = (props) => {
           <LogoutIcon />
         </button>
       </Box>
-      <Board balance={balance}>
-        {data.length === 0 ? (
-          <p>Não há registros de entrada ou saída</p>
-        ) : (
-          <>
-            <ItemList data={data} token={auth.token} />
-          </>
-        )}
-      </Board>
+      <Board balance={balance}>{createContent()}</Board>
       <Box bgButtonColor="#A328D6">
         <BoxButton onClick={() => navigate("/wallet/new-entry")}>
           <PlusIcon />
