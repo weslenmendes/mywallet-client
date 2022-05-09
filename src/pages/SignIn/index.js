@@ -70,7 +70,11 @@ const SignIn = () => {
           disabled={loading}
           required
         />
-        <Button type="submit" isLoading={loading} disabled={loading}>
+        <Button
+          type="submit"
+          isLoading={loading}
+          disabled={!(form.email && form.password)}
+        >
           Entrar
         </Button>
       </form>

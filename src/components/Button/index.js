@@ -3,7 +3,7 @@ import { ThreeDots } from "react-loader-spinner";
 
 const Button = (props) => {
   return (
-    <ButtonStyled {...props} disabled={props.disabled}>
+    <ButtonStyled {...props} className={props.disabled ? "disabled" : ""}>
       {!props.isLoading === true ? (
         props.children
       ) : (
@@ -28,9 +28,16 @@ const ButtonStyled = styled.button`
   text-align: center;
   background: var(--primary-light);
 
-  button:disabled {
+  button::disabled {
     pointer-events: none;
     cursor: not-allowed;
+    filter: brightness(0.8);
+  }
+
+  .disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    filter: brightness(0.8);
   }
 `;
 
