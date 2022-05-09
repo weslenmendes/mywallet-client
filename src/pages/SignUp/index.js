@@ -54,6 +54,18 @@ const SignUp = (props) => {
       });
   };
 
+  const changeColor = () => {
+    if (form.password && form.confirmPassword) {
+      if (form.password === form.confirmPassword) {
+        return "#03AC00";
+      } else {
+        return "#c70000";
+      }
+    }
+
+    return "transparent";
+  };
+
   return (
     <Container>
       <h1>MyWallet</h1>
@@ -88,6 +100,7 @@ const SignUp = (props) => {
           onChange={handleChange}
           placeholder="Confirme a senha"
           disabled={loading}
+          borderColor={changeColor()}
           required
         />
         <Button type="submit" isLoading={loading}>

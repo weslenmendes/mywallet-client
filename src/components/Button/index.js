@@ -22,6 +22,7 @@ const ButtonStyled = styled.button`
   line-height: 23.48px;
 
   width: 100%;
+  max-width: 450px;
   margin-top: 13px;
   padding: 15px 0 16px 0;
   text-align: center;
